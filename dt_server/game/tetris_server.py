@@ -14,7 +14,6 @@ class TetrisServer:
         return "right"
 
 
-
     # lista de jogadores
 
     player_list = []
@@ -24,3 +23,11 @@ class TetrisServer:
     def addPlayer(name):
         player = Player(name)
         player_list.__add__(player)
+
+    # trocar de jogador quando completa uma linha ou assenta a peça
+
+    def switchPlayer(self):
+        if player_list[0].active == False:
+            player_list[0].active = True
+        else:
+            player_list[1] = True
