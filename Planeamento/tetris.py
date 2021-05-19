@@ -208,6 +208,17 @@ def draw_text_middle(text, size, color, surface):
 
     surface.blit(label, (top_left_x + play_width/2 - (label.get_width() / 2), top_left_y + play_height/2 - label.get_height()/2))
 
+##########################            Draw on top (initial screen)            ################################
+
+def draw_text_top(text, size, color, surface):
+    font = pygame.font.SysFont('comicsans', size, bold=True)
+    label = font.render(text, 1, color)
+
+    surface.blit(label, (top_left_x +50 + play_width - (label.get_width()), top_left_y - 500 + play_height - label.get_height()))
+
+
+###############################################################################################################
+
 
 def draw_grid(surface, row, col):
     sx = top_left_x
@@ -243,6 +254,7 @@ def clear_rows(grid, locked):
                 newKey = (x, y + inc)
                 locked[newKey] = locked.pop(key)
 
+    return inc
 
 def draw_next_shape(shape, surface):
     font = pygame.font.SysFont('comicsans', 30)
@@ -264,17 +276,19 @@ def draw_next_shape(shape, surface):
 
 ################################    Desenhar pontuação   ##################################
 
-def draw_points(surface):
+def draw_points(surface, score):
 
     # incluir ciclo para verificar quantos jogadores/clientes estão ligados e os respetivos pontos
 
     font = pygame.font.SysFont('comicsans', 30)
     label = font.render('Points', 1, (0, 255, 0))  #substituir "Player 1" pelo nome do jogador/cliente
+    points = font.render(str(score), 1, (0, 255, 0))
 
     sx = top_left_x + play_width + 50
     sy = top_left_y + play_height / 2 - 100
 
     surface.blit(label, (sx -550 , sy -30 ))
+    surface.blit(points, (sx - 550, sy - 10))
 
 ###########################################################################################
 
@@ -294,7 +308,7 @@ def draw_window(surface):
     # draw grid and border
     draw_grid(surface, 20, 10)
     pygame.draw.rect(surface, (255, 0, 0), (top_left_x, top_left_y, play_width, play_height), 5)
-    # pygame.display.update()
+    #pygame.display.update()
 
 
 def main():
@@ -390,18 +404,22 @@ def main():
             next_piece = get_shape()
             change_piece = False
 
+            limpa_linhas = clear_rows(grid, locked_positions)
+
             # call four times to check for multiple clear rows
-            if clear_rows(grid, locked_positions):
+            if limpa_linhas > 0:
 
             # score mudado de 10 para 1, arranjar maneira de atribuir ao player activo
-                score += 1
+                score += limpa_linhas
+
 
         draw_window(win)
         draw_next_shape(next_piece, win)
 
 ####################################
 
-        draw_points(win)
+
+        draw_points(win, score)
 
 ####################################
 
@@ -421,12 +439,12 @@ def main_menu():
     run = True
     while run:
         win.fill((0,0,0))
+        draw_text_top('Wecolmes bitches', 60, (255, 0, 0), win)
         draw_text_middle('Press any key to begin.', 60, (0, 255, 0), win)
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-
             if event.type == pygame.KEYDOWN:
                 main()
     pygame.quit()
