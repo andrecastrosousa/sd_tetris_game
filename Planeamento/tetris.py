@@ -236,7 +236,7 @@ def clear_rows(grid, locked):
 
 def draw_next_shape(shape, surface):
     font = pygame.font.SysFont('comicsans', 30)
-    label = font.render('Next Shape', 1, (255,255,255))
+    label = font.render('Next Shape', 1, (0,255,0))
 
     sx = top_left_x + play_width + 50
     sy = top_left_y + play_height/2 - 100
@@ -251,11 +251,28 @@ def draw_next_shape(shape, surface):
     surface.blit(label, (sx + 10, sy- 30))
 
 
+
+################################    Desenhar pontuação   ##################################
+
+def draw_points(surface):
+
+
+    font = pygame.font.SysFont('comicsans', 30)
+    label = font.render('Points', 1, (0, 255, 0))
+
+    sx = top_left_x + play_width + 50
+    sy = top_left_y + play_height / 2 - 100
+
+    surface.blit(label, (sx -500 , sy -30 ))
+
+###########################################################################################
+
 def draw_window(surface):
     surface.fill((0,0,0))
     # Tetris Title
-    font = pygame.font.SysFont('comicsans', 60)
-    label = font.render('TETRIS', 1, (255,255,255))
+    font = pygame.font.SysFont('comicsans', 40)
+
+    label = font.render('DISTRIBUTED TETRIS', 1, (255, 0, 0))
 
     surface.blit(label, (top_left_x + play_width / 2 - (label.get_width() / 2), 30))
 
@@ -363,7 +380,15 @@ def main():
 
         draw_window(win)
         draw_next_shape(next_piece, win)
+
+####################################
+
+        draw_points(win)
+
+####################################
+
         pygame.display.update()
+
 
         # Check if user lost
         if check_lost(locked_positions):
