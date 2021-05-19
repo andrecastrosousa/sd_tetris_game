@@ -9,6 +9,9 @@ class TetrisGame:
         super().__init__()
         self._current_connection = Socket.create_client_socket(host, port)
 
+
+# confirmar este método !
+
     def move_left(self):
         if self._current_connection is None:
             self.connect()

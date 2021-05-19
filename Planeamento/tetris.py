@@ -10,10 +10,17 @@ represented in order by 0 - 6
 pygame.font.init()
 
 # GLOBALS VARS
+
+############### tamanho da janela ###############
+
 s_width = 800
 s_height = 700
+
+############### tamanho do tabuleiro ###############
+
 play_width = 300  # meaning 300 // 10 = 30 width per block
 play_height = 600  # meaning 600 // 20 = 20 height per blo ck
+
 block_size = 30
 
 top_left_x = (s_width - play_width) // 2
@@ -211,6 +218,9 @@ def draw_grid(surface, row, col):
             pygame.draw.line(surface, (128,128,128), (sx + j * 30, sy), (sx + j * 30, sy + play_height))  # vertical lines
 
 
+
+# incluir maneira de ver que jogador completou a fila e atribuir-lhe um ponto
+
 def clear_rows(grid, locked):
     # need to see if row is clear the shift every other row above down one
 
@@ -256,14 +266,15 @@ def draw_next_shape(shape, surface):
 
 def draw_points(surface):
 
+    # incluir ciclo para verificar quantos jogadores/clientes estão ligados e os respetivos pontos
 
     font = pygame.font.SysFont('comicsans', 30)
-    label = font.render('Points', 1, (0, 255, 0))
+    label = font.render('Points', 1, (0, 255, 0))  #substituir "Player 1" pelo nome do jogador/cliente
 
     sx = top_left_x + play_width + 50
     sy = top_left_y + play_height / 2 - 100
 
-    surface.blit(label, (sx -500 , sy -30 ))
+    surface.blit(label, (sx -550 , sy -30 ))
 
 ###########################################################################################
 
@@ -323,6 +334,9 @@ def main():
                 current_piece.y -= 1
                 change_piece = True
 
+
+        #  Usar "K_a", "K_w", "K_s" e "K_d" para movimentar WASD com segundo jogador (?) a decidir
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -357,6 +371,8 @@ def main():
                     current_piece.y -= 1
                     print(convert_shape_format(current_piece))'''  # todo fix
 
+
+
         shape_pos = convert_shape_format(current_piece)
 
         # add piece to the grid for drawing
@@ -376,7 +392,9 @@ def main():
 
             # call four times to check for multiple clear rows
             if clear_rows(grid, locked_positions):
-                score += 10
+
+            # score mudado de 10 para 1, arranjar maneira de atribuir ao player activo
+                score += 1
 
         draw_window(win)
         draw_next_shape(next_piece, win)
@@ -394,7 +412,7 @@ def main():
         if check_lost(locked_positions):
             run = False
 
-    draw_text_middle("You Lost", 40, (255,255,255), win)
+    draw_text_middle("You Lost", 40, (255,255,255), win)  # incluir qual jogador perdeu
     pygame.display.update()
     pygame.time.delay(2000)
 
@@ -403,7 +421,7 @@ def main_menu():
     run = True
     while run:
         win.fill((0,0,0))
-        draw_text_middle('Press any key to begin.', 60, (255, 255, 255), win)
+        draw_text_middle('Press any key to begin.', 60, (0, 255, 0), win)
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

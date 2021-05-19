@@ -3,11 +3,12 @@ from stubs.tetris_game import TetrisGame
 
 class Player:
 
-# adicionados atributos necessários para o jogador
+################## adicionados atributos necessários para o jogador ##################
 
     name = ''
     points = 0
     active = False
+#######################################################################################
 
 
     def __init__(self, game: TetrisGame):
@@ -36,6 +37,6 @@ class Player:
     def setPoints(self):
         self.points += 1
 
-
+########################################################################
 
 
