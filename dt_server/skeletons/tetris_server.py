@@ -12,13 +12,23 @@ class TetrisServer(Socket):
 
     def left(self) -> None:
         print("dentro do left")
-        string = self._server.left()
-        self.send_str(string)
+        input = self._server.left()
+        self.send_int(input, 10)
 
     def right(self) -> None:
         print("dentro do right")
-        string = self._server.right()
-        self.send_str(string)
+        input = self._server.right()
+        self.send_int(input, 10)
+
+    def down(self) -> None:
+        print("dentro do down")
+        input = self._server.down()
+        self.send_int(input, 10)
+
+    def up(self) -> None:
+        print("dentro do up")
+        input = self._server.up()
+        self.send_int(input, 10)
 
     # def rotate
 

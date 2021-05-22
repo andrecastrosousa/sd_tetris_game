@@ -18,8 +18,19 @@ class Player:
         self._active = True
 
 
+# adicionados métodos para os INPUTS do jogo
+
     def move_left(self):
         print(self._game.move_left())
+
+    def move_right(self):
+        print(self._game.move_right())
+
+    def move_down(self):
+        print(self._game.move_down())
+
+    def move_up(self):
+        print(self._game.move_up())
 
     def exit(self):
         self._game.exit()

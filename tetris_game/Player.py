@@ -7,3 +7,9 @@ class Player:
     @property
     def name(self) -> str:
         return self._name
+
+    #adicionada propriedade score
+
+    @property
+    def score(self) -> int:
+        return self._score

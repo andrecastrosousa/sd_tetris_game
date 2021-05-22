@@ -148,7 +148,7 @@ class UI:
     def update_score(self, score):
         font = pygame.font.SysFont('comicsans', 30)
         font2 = pygame.font.SysFont('comcsans', 20)
-        print(type(self._player.name))
+        #print(type(self._player.name))
         label = font.render(self._player.name, 1, (255, 255, 255))
         label2 = font2.render(str(score) + " points", 1, (255, 255, 255))
         sx = self.top_left_x - 200
@@ -236,23 +236,27 @@ class UI:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT:
                         current_piece.x -= 1
+                        print(pygame.K_LEFT)
                         if not jogo.valid_space(current_piece):
                             current_piece.x += 1
 
                     elif event.key == pygame.K_RIGHT:
                         current_piece.x += 1
+                        print(pygame.K_RIGHT)
                         if not jogo.valid_space(current_piece):
                             current_piece.x -= 1
 
                     elif event.key == pygame.K_UP:
                         # rotate shape
                         current_piece.rotation = current_piece.rotation + 1 % len(current_piece.shape)
+                        print(pygame.K_UP)
                         if not jogo.valid_space(current_piece):
                             current_piece.rotation = current_piece.rotation - 1 % len(current_piece.shape)
 
                     if event.key == pygame.K_DOWN:
                         # move shape down
                         current_piece.y += 1
+                        print(pygame.K_DOWN)
                         if not jogo.valid_space(current_piece):
                             current_piece.y -= 1
 
@@ -260,7 +264,7 @@ class UI:
 
             # add piece to the grid for drawing
             for i in range(len(shape_pos)):
-                print(shape_pos[i])
+                #print(shape_pos[i])
                 x, y = shape_pos[i]
                 if y > -1:
                     grid[y][x] = current_piece.color

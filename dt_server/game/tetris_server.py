@@ -13,6 +13,17 @@ class TetrisServer:
     def right():
         return "right"
 
+    # adicionados métodos em falta
+
+    @staticmethod
+    def down():
+        return "down"
+
+    @staticmethod
+    def up():
+        return "up"
+
+
 
     # lista de jogadores
 
