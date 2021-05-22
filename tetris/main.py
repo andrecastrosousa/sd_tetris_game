@@ -10,7 +10,7 @@ represented in order by 0 - 6
 """
 
 play_width = 300  # meaning 300 // 10 = 30 width per block
-play_height = 600  # meaning 600 // 20 = 20 height per blo ck
+play_height = 600  # meaning 600 // 20 = 20 height per block
 
 pygame.font.init()
 # GLOBALS VARS
