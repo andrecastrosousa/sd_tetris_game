@@ -30,21 +30,6 @@ class TetrisServer(Socket):
         input = self._server.up()
         self.send_int(input, 10)
 
-    # def rotate
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     def run(self) -> None:
         current_socket = socket.socket()

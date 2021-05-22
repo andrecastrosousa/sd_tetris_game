@@ -194,10 +194,10 @@ class UI:
         self._player = player
         shapes = [Piece(5, 0, I, (0, 255, 0)),
                   Piece(5, 0, J, (255, 0, 0)),
-                  Piece(5, 0, L, (0, 255, 255)),
+                  Piece(5, 0, L, (0, 0, 255)),
                   Piece(5, 0, S, (0, 255, 0)),
-                  Piece(5, 0, Z, (0, 255, 0)),
-                  Piece(5, 0, O, (0, 255, 0)),
+                  Piece(5, 0, Z, (255, 0, 0)),
+                  Piece(5, 0, O, (0, 0, 255)),
                   Piece(5, 0, T, (0, 255, 0))]
 
         tabuleiro = Tabuleiro(self.s_width, self.s_width)
