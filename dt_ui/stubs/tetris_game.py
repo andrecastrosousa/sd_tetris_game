@@ -15,7 +15,7 @@ class TetrisGame:
     def move_left(self):
         if self._current_connection is None:
             self.connect()
-        self._current_connection.send_str("right")
+        self._current_connection.send_str("left")
         return self._current_connection.receive_str()
 
     def exit(self):

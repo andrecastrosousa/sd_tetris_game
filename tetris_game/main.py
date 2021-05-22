@@ -61,17 +61,39 @@ def alternative_callback(id, final):
 
 def button_callback():
     global done
-
     done = True
+
+# refactor later, copied from UI.py
+
+def draw_text_middle(window, top_left_x, top_left_y, text, size, color):
+
+    font = pygame.font.SysFont('comicsans', size, bold=True)
+    label = font.render(text, 1, color)
+
+    window.blit(label, (
+        top_left_x + play_width / 2 - (label.get_width() / 2),
+        top_left_y + play_height / 2 - label.get_height() / 2))
+
+def draw_title(window, top_left_x, top_left_y, text, size, color):
+
+    font = pygame.font.SysFont('comicsans', size, bold=True)
+    label = font.render(text, 1, color)
+
+    window.blit(label, (
+        top_left_x + play_width / 2 - (label.get_width() / 2),
+        top_left_y + play_height / 2 - label.get_height() / 2))
+
 
 
 
 def main_menu():
     # see all settings help(pygooey.TextBox.__init__)
 
+    ui = UI(pygame.display.set_mode((800, 700)), (800 - play_width) // 2, 700 - play_height)
+
     global done
 
-    entry = TextBox(rect=(70, 100, 150, 30), command=textbox_callback, **entry_settings)
+    entry = TextBox(rect=(320, 450, 150, 30), command=textbox_callback, **entry_settings)
 
     widgets.append(entry)
 
@@ -84,8 +106,15 @@ def main_menu():
         'border_color': (0, 0, 0),
     }
 
-    btn = Button(rect=(10, 10, 105, 25), command=button_callback, text='OK', **btn_settings)
+    btn = Button(rect=(320, 550, 150, 50), command=button_callback, text='JOGAR', **btn_settings)
     widgets.append(btn)
+
+    #ui.draw_text_middle('DISTRIBUTED TETRIS', 60, (0, 255, 0))
+
+    draw_title(ui.window, ui.top_left_x, ui.top_left_y - 100,'DISTRIBUTED TETRIS', 55, (255, 255, 255))
+
+    draw_text_middle(ui.window, ui.top_left_x, ui.top_left_y, 'Insert Player', 35, (255, 255, 255))
+
 
     while not done:
         for event in pygame.event.get():
@@ -99,7 +128,7 @@ def main_menu():
             w.draw(screen)
         pygame.display.update()
 
-    ui = UI(pygame.display.set_mode((800, 700)), (800 - play_width) // 2, 700 - play_height)
+
     run = True
     while run:
         ui.fill()

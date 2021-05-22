@@ -20,6 +20,22 @@ class TetrisServer(Socket):
         string = self._server.right()
         self.send_str(string)
 
+    # def rotate
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     def run(self) -> None:
         current_socket = socket.socket()
         current_socket.bind(('', self._port))

@@ -48,7 +48,7 @@ class Button(object):
         settings = {
             "color": pg.Color('red'),
             "text": None,
-            "font": None,  # pg.font.Font(None,16),
+            "font": pg.font.Font(None, 30),  # pg.font.Font(None,16),
             "call_on_release": True,
             "hover_color": None,
             "clicked_color": None,
