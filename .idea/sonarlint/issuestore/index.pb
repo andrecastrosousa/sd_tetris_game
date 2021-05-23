@@ -23,3 +23,13 @@ B
 dt_ui/ui/player.py,7\4\74b0f83465eca67b9687786d6efbd5fe133cf1fc
 J
 dt_ui/stubs/tetris_game.py,f\4\f476f26071bcadde44a6449ce16e10f1b9b50324
+D
+tetris_game/Piece.py,c\7\c7edcbfa598f61a605026bb898a392d53b1fce92
+G
+tetris_game/__init__.py,a\5\a502cc6419899b0a0b2064106b7030b93544504f
+E
+tetris_game/Button.py,e\9\e9b8b30c62120609d14e36dbe6d670dd8186e3f1
+C
+tetris_game/Jogo.py,9\3\93b1c9e20549f2eb06a81e055bf73cc9a4aaaf13
+A
+tetris_game/UI.py,6\3\639b7c5c6d2fb7f80b1a853465a2e042b5046151

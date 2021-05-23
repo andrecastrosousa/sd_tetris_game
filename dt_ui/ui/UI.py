@@ -1,21 +1,139 @@
 import pygame
 
-from Jogo import Jogo
-from Piece import Piece
-from Tabuleiro import Tabuleiro
+# from Jogo import Jogo
+# from Piece import Piece
+# from Tabuleiro import Tabuleiro
 
 play_width = 300  # meaning 300 // 10 = 30 width per block
 play_height = 600  # meaning 600 // 20 = 20 height per blo ck
+
+I = [['..0..',
+      '..0..',
+      '..0..',
+      '..0..',
+      '.....'],
+     ['.....',
+      '0000.',
+      '.....',
+      '.....',
+      '.....']]
+
+J = [['.....',
+      '.0...',
+      '.000.',
+      '.....',
+      '.....'],
+     ['.....',
+      '..00.',
+      '..0..',
+      '..0..',
+      '.....'],
+     ['.....',
+      '.....',
+      '.000.',
+      '...0.',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..0..',
+      '.00..',
+      '.....']]
+
+L = [['.....',
+      '...0.',
+      '.000.',
+      '.....',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..0..',
+      '..00.',
+      '.....'],
+     ['.....',
+      '.....',
+      '.000.',
+      '.0...',
+      '.....'],
+     ['.....',
+      '.00..',
+      '..0..',
+      '..0..',
+      '.....']]
+
+
+# adicionando restantes tipos de peças
+
+
+S = [['.....',
+      '.....',
+      '..00.',
+      '.00..',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..00.',
+      '...0.',
+      '.....']]
+
+Z = [['.....',
+      '.....',
+      '.00..',
+      '..00.',
+      '.....'],
+     ['.....',
+      '..0..',
+      '.00..',
+      '.0...',
+      '.....']]
+
+O = [['.....',
+      '.....',
+      '.00..',
+      '.00..',
+      '.....']]
+
+T = [['.....',
+      '..0..',
+      '.000.',
+      '.....',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..00.',
+      '..0..',
+      '.....'],
+     ['.....',
+      '.....',
+      '.000.',
+      '..0..',
+      '.....'],
+     ['.....',
+      '..0..',
+      '.00..',
+      '..0..',
+      '.....']]
 
 
 class UI:
     def __init__(self, window, top_left_x, top_left_y):
         self._player = None
-        self.window = window
+        self._window = window
         self.s_width = 800
         self.s_height = 700
-        self.top_left_x = top_left_x
-        self.top_left_y = top_left_y
+        self._top_left_x = top_left_x
+        self._top_left_y = top_left_y
+
+    @property
+    def window(self):
+        return self._window
+
+    @property
+    def top_left_x(self):
+        return self._top_left_y
+
+    @property
+    def top_left_y(self):
+        return self._top_left_y
 
     def fill(self):
         self.window.fill((0, 0, 0))
@@ -42,9 +160,10 @@ class UI:
     def update_score(self, score):
         font = pygame.font.SysFont('comicsans', 30)
         font2 = pygame.font.SysFont('comcsans', 20)
-        #print(type(self._player.name))
+
         label = font.render(self._player.name, 1, (255, 255, 255))
         label2 = font2.render(str(score) + " points", 1, (255, 255, 255))
+
         sx = self.top_left_x - 200
         sy = self.top_left_y + play_height / 2 - 50
 
@@ -57,9 +176,9 @@ class UI:
 
         sx = self.top_left_x + play_width + 50
         sy = self.top_left_y + play_height / 2 - 100
-        format = shape.shape[shape.rotation % len(shape.shape)]
+        format_shape = shape.shape[shape.rotation % len(shape.shape)]
 
-        for i, line in enumerate(format):
+        for i, line in enumerate(format_shape):
             row = list(line)
             for j, column in enumerate(row):
                 if column == '0':
@@ -82,20 +201,17 @@ class UI:
         # draw grid and border
         self.draw_grid(20, 10)
         pygame.draw.rect(self.window, (255, 0, 0), (self.top_left_x, self.top_left_y, play_width, play_height), 5)
-        # pygame.display.update()
+
+    def draw_title(self, text, size, color):
+        font = pygame.font.SysFont('comicsans', size, bold=True)
+        label = font.render(text, 1, color)
+
+        self._window.blit(label, (
+            self._top_left_x + play_width / 2 - (label.get_width() / 2),
+            self._top_left_y + play_height / 2 - label.get_height() / 2))
 
     def run(self, player):
         self._player = player
-        shapes = [Piece(5, 0, I, (0, 255, 0)),
-                  Piece(5, 0, J, (255, 0, 0)),
-                  Piece(5, 0, L, (0, 255, 255)),
-                  Piece(5, 0, S, (255, 255, 0)),
-                  Piece(5, 0, Z, (255, 165, 0)),
-                  Piece(5, 0, O, (0, 0, 255)),
-                  Piece(5, 0, T, (128, 0, 128))]
-
-        tabuleiro = Tabuleiro(self.s_width, self.s_width)
-        jogo = Jogo(tabuleiro, shapes)
 
         change_piece = False
         run = True
@@ -108,7 +224,7 @@ class UI:
 
         while run:
             grid = jogo.create_grid()
-            locked_positions = tabuleiro.locked_positions
+            locked_positions = jogo.locked_positions()
 
             fall_time += clock.get_rawtime()
             clock.tick()
@@ -158,7 +274,6 @@ class UI:
 
             # add piece to the grid for drawing
             for i in range(len(shape_pos)):
-                #print(shape_pos[i])
                 x, y = shape_pos[i]
                 if y > -1:
                     grid[y][x] = current_piece.color

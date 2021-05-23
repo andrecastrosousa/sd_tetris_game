@@ -1,14 +1,15 @@
 import socket
 from sockets.sockets_mod import Socket
+from game.Jogo import Jogo
 
 import game
 
 
 class TetrisServer(Socket):
-    def __init__(self, port: int, tetris_server: game.TetrisServer):
+    def __init__(self, port: int, jogo: game.Jogo):
         super().__init__()
         self._port = port
-        self._server = tetris_server
+        self._server = jogo
 
     def left(self) -> None:
         print("dentro do left")
@@ -29,7 +30,6 @@ class TetrisServer(Socket):
         print("dentro do up")
         input = self._server.up()
         self.send_int(input, 10)
-
 
     def run(self) -> None:
         current_socket = socket.socket()

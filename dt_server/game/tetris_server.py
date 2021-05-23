@@ -1,6 +1,6 @@
 
 
-from dt_ui.ui import player
+from dt_ui.ui import Player
 
 
 class TetrisServer:

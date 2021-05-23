@@ -1,9 +1,12 @@
 import game
 import skeletons
-
+from game.Jogo import Jogo
+from game.Tabuleiro import Tabuleiro
 
 
 def main():
-    skeletons.TetrisServer(skeletons.PORT, game.TetrisServer()).run()
+    jogo = Jogo(Tabuleiro(), game.shapes)
+    skeletons.TetrisServer(skeletons.PORT, jogo).run()
+
 
 main()
