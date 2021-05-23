@@ -4,6 +4,112 @@ from Jogo import Jogo
 from Piece import Piece
 from Tabuleiro import Tabuleiro
 
+I = [['..0..',
+      '..0..',
+      '..0..',
+      '..0..',
+      '.....'],
+     ['.....',
+      '0000.',
+      '.....',
+      '.....',
+      '.....']]
+
+J = [['.....',
+      '.0...',
+      '.000.',
+      '.....',
+      '.....'],
+     ['.....',
+      '..00.',
+      '..0..',
+      '..0..',
+      '.....'],
+     ['.....',
+      '.....',
+      '.000.',
+      '...0.',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..0..',
+      '.00..',
+      '.....']]
+
+L = [['.....',
+      '...0.',
+      '.000.',
+      '.....',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..0..',
+      '..00.',
+      '.....'],
+     ['.....',
+      '.....',
+      '.000.',
+      '.0...',
+      '.....'],
+     ['.....',
+      '.00..',
+      '..0..',
+      '..0..',
+      '.....']]
+
+
+# adicionando restantes tipos de peças
+
+
+S = [['.....',
+      '.....',
+      '..00.',
+      '.00..',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..00.',
+      '...0.',
+      '.....']]
+
+Z = [['.....',
+      '.....',
+      '.00..',
+      '..00.',
+      '.....'],
+     ['.....',
+      '..0..',
+      '.00..',
+      '.0...',
+      '.....']]
+
+O = [['.....',
+      '.....',
+      '.00..',
+      '.00..',
+      '.....']]
+
+T = [['.....',
+      '..0..',
+      '.000.',
+      '.....',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..00.',
+      '..0..',
+      '.....'],
+     ['.....',
+      '.....',
+      '.000.',
+      '..0..',
+      '.....'],
+     ['.....',
+      '..0..',
+      '.00..',
+      '..0..',
+      '.....']]
+
 play_width = 300  # meaning 300 // 10 = 30 width per block
 play_height = 600  # meaning 600 // 20 = 20 height per blo ck
 
@@ -108,7 +214,7 @@ class UI:
 
         while run:
             grid = jogo.create_grid()
-            locked_positions = tabuleiro.locked_positions
+            locked_positions = jogo.get_locked_positions()
 
             fall_time += clock.get_rawtime()
             clock.tick()
@@ -171,11 +277,12 @@ class UI:
                 current_piece = next_piece
                 next_piece = jogo.get_shape()
                 change_piece = False
-                tabuleiro.locked_positions = locked_positions
+                jogo.set_locked_positions(locked_positions)
 
+                inc = jogo.clear_rows()
                 # call four times to check for multiple clear rows
-                if jogo.clear_rows():
-                    score += 1
+                if inc:
+                    score += inc
                     self.update_score(score)
 
             self.draw_window(grid)

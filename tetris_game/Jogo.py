@@ -14,8 +14,11 @@ class Jogo:
         peca = random.choice(self._pecas)
         return Piece(5, 0, peca.shape, peca.color)
 
-    def locked_positions(self, locked_positions):
+    def set_locked_positions(self, locked_positions):
         self._tabuleiro.locked_positions = locked_positions
+
+    def get_locked_positions(self):
+        return self._tabuleiro.locked_positions
 
     def create_grid(self):
         return self._tabuleiro.create_grid()

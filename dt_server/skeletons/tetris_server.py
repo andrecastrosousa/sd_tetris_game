@@ -14,7 +14,7 @@ class TetrisServer(Socket):
     def left(self) -> None:
         print("dentro do left")
         input = self._server.left()
-        self.send_int(input, 10)
+        self.send_str(input)
 
     def right(self) -> None:
         print("dentro do right")
@@ -27,9 +27,39 @@ class TetrisServer(Socket):
         self.send_int(input, 10)
 
     def up(self) -> None:
-        print("dentro do up")
         input = self._server.up()
         self.send_int(input, 10)
+
+    def get_shape(self):
+        shape = self._server.get_shape()
+        self.send_obj(shape)
+
+    def create_grid(self):
+        grid = self._server.create_grid()
+        self.send_obj(grid)
+
+    def get_locked_positions(self):
+        locked_positions = self._server.get_locked_positions()
+        self.send_obj(locked_positions)
+
+    def set_locked_positions(self, locked_positions):
+        self._server.set_locked_positions(locked_positions)
+
+    def valid_space(self, piece):
+        valid_space = self._server.valid_space(piece)
+        self.send_obj(valid_space)
+
+    def clear_rows(self):
+        rows_cleared = self._server.clear_rows()
+        self.send_int(rows_cleared, 2)
+
+    def convert_shape_format(self, current_piece):
+        shape = self._server.convert_shape_format(current_piece)
+        self.send_obj(shape)
+
+    def check_lost(self):
+        lost = self._server.check_lost()
+        self.send_int(lost, 2)
 
     def run(self) -> None:
         current_socket = socket.socket()
@@ -56,6 +86,22 @@ class TetrisServer(Socket):
             self.left()
         elif request_type == "right":
             self.right()
+        elif request_type == "shape":
+            self.get_shape()
+        elif request_type == "grid":
+            self.create_grid()
+        elif request_type == "getlocked":
+            self.get_locked_positions()
+        elif request_type == "setlocked":
+            self.set_locked_positions(self.receive_obj())
+        elif request_type == "valid":
+            self.valid_space(self.receive_obj())
+        elif request_type == "clear":
+            self.clear_rows()
+        elif request_type == "convert":
+            self.convert_shape_format(self.receive_obj())
+        elif request_type == "lost":
+            self.check_lost()
         elif request_type == "exit":
             last_request = True
             keep_running = False

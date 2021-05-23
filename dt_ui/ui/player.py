@@ -39,6 +39,18 @@ class Player:
         self.move_left()
         self.exit()
 
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def points(self):
+        return self._points
+
+    @points.setter
+    def points(self, points):
+        self._points += points
+
 
 ######################################################################
 

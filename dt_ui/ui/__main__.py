@@ -48,7 +48,7 @@ def main_menu():
     game = TetrisGame(ui.SERVER_ADDRESS, stubs.PORT)  # STUB
     # see all settings help(pygooey.TextBox.__init__)
 
-    ui_game = UI(pygame.display.set_mode((800, 700)), (800 - play_width) // 2, 700 - play_height)
+    ui_game = UI(pygame.display.set_mode((800, 700)), (800 - play_width) // 2, 700 - play_height, game)
 
     global done
 
@@ -74,7 +74,6 @@ def main_menu():
 
     while not done:
         for event in pygame.event.get():
-            print(event.type)
             if event.type == pygame.K_RETURN or event.type == pygame.QUIT:
                 done = True
             for w in widgets:
@@ -91,14 +90,16 @@ def main_menu():
         name = ""
         for caracter in entry.buffer:
             name += caracter
-        p = Player(name, game)
+        player = Player(name, game)
+        ui_game.player = player
         pygame.display.update()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
 
             if event.type == pygame.KEYDOWN:
-                ui_game.run(p)
+                ui_game.run()
     pygame.quit()
 
 

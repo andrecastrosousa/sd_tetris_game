@@ -1,3 +1,4 @@
+import pickle
 from socket import socket, timeout
 from typing import Union
 
@@ -39,13 +40,22 @@ class Socket:
     def receive_str(self) -> str:
         n_bytes: int = self.receive_int(sockets.INT_SIZE)
         received: bytes = self._current_connection.recv(n_bytes)
-        print(received.decode())
         return received.decode()
 
     def send_str(self, value: str) -> None:
         to_send: bytes = value.encode()
         self.send_int(len(to_send), sockets.INT_SIZE)
         self._current_connection.send(to_send)
+
+    def send_obj(self, obj):
+        data: bytes = pickle.dumps(obj)
+        self.send_int(len(data), sockets.INT_SIZE)
+        self._current_connection.send(data)
+
+    def receive_obj(self):
+        n_bytes: int = self.receive_int(sockets.INT_SIZE)
+        received: bytes = self._current_connection.recv(n_bytes)
+        return pickle.loads(received)
 
     def __enter__(self):
         return self

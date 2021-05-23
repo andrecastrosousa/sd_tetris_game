@@ -11,6 +11,7 @@ class Tabuleiro:
 
     @locked_positions.setter
     def locked_positions(self, locked_positions):
+        print(locked_positions)
         self._locked_positions = locked_positions
 
     def create_grid(self):
@@ -26,7 +27,6 @@ class Tabuleiro:
 
     def clear_rows(self):
         # need to see if row is clear the shift every other row above down one
-
         inc = 0
         for i in range(len(self._grid) - 1, -1, -1):
             row = self._grid[i]
