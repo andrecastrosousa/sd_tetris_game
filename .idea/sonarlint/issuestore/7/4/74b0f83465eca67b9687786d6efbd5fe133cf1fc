@@ -1,0 +1,4 @@
+
+6python:S125"Remove this commented out code.(áÒåÆ
+kpython:S100A"ORename method "resetPoints" to match the regular expression ^[a-z_][a-z0-9_]*$.(¶áÐ¾úÿÿÿÿ
+dpython:S100<"MRename method "setPoints" to match the regular expression ^[a-z_][a-z0-9_]*$.(³÷œŒ
