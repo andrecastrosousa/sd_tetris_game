@@ -292,12 +292,11 @@ class UI:
                     p = (pos[0], pos[1])
                     locked_positions[p] = current_piece.color
                 self._game.set_locked_positions(locked_positions)
-
                 current_piece = next_piece
                 next_piece = self._game.get_shape()
                 change_piece = False
 
-                score_plus = self._game.clear_rows()
+                score_plus = self._game.clear_rows(grid)
                 print("ola ", score_plus)
                 # call four times to check for multiple clear rows
                 if score_plus:

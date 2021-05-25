@@ -23,8 +23,8 @@ class Jogo:
     def create_grid(self):
         return self._tabuleiro.create_grid()
 
-    def clear_rows(self):
-        return self._tabuleiro.clear_rows()
+    def clear_rows(self, grid):
+        return self._tabuleiro.clear_rows(grid)
 
     def valid_space(self, shape):
         return self._tabuleiro.valid_space(shape)
@@ -39,5 +39,6 @@ class Jogo:
         for pos in self._tabuleiro.locked_positions:
             x, y = pos
             if y < 1:
+                self._tabuleiro.locked_positions = {}
                 return True
         return False

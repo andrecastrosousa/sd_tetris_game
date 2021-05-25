@@ -1,5 +1,4 @@
 from game.Piece import Piece
-from game.tetris_server import TetrisServer
 
 COMMAND_SIZE = 9
 

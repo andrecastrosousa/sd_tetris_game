@@ -74,10 +74,11 @@ class TetrisGame:
         self._current_connection.send_obj(piece)
         return self._current_connection.receive_obj()
 
-    def clear_rows(self):
+    def clear_rows(self, grid):
         if self._current_connection is None:
             self.connect()
         self._current_connection.send_str("clear")
+        self._current_connection.send_obj(grid)
         return self._current_connection.receive_int(10)
 
     def convert_shape_format(self, current_piece):

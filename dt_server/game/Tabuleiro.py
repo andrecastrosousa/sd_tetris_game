@@ -25,9 +25,10 @@ class Tabuleiro:
         self._grid = grid
         return grid
 
-    def clear_rows(self):
+    def clear_rows(self, grid):
         # need to see if row is clear the shift every other row above down one
         inc = 0
+        self._grid = grid
         for i in range(len(self._grid) - 1, -1, -1):
             row = self._grid[i]
             if (0, 0, 0) not in row:

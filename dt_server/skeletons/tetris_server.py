@@ -49,8 +49,8 @@ class TetrisServer(Socket):
         valid_space = self._server.valid_space(piece)
         self.send_obj(valid_space)
 
-    def clear_rows(self):
-        rows_cleared = self._server.clear_rows()
+    def clear_rows(self, grid):
+        rows_cleared = self._server.clear_rows(grid)
         self.send_int(rows_cleared, 2)
 
     def convert_shape_format(self, current_piece):
@@ -97,7 +97,7 @@ class TetrisServer(Socket):
         elif request_type == "valid":
             self.valid_space(self.receive_obj())
         elif request_type == "clear":
-            self.clear_rows()
+            self.clear_rows(self.receive_obj())
         elif request_type == "convert":
             self.convert_shape_format(self.receive_obj())
         elif request_type == "lost":

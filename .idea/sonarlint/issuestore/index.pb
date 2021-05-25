@@ -13,8 +13,6 @@ J
 dt_server/game/__main__.py,8\5\85d1450e07df891f37727a934bdebe4db2a7b4d2
 D
 dt_ui/ui/__main__.py,5\a\5a6d756b21d6fe1e37385512c12217ab95032d0c
-O
-dt_server/game/tetris_server.py,2\c\2cf1b13449a462e05266b1cde8a9df0b3b4772d7
 T
 $dt_server/skeletons/tetris_server.py,c\5\c5c0fe94c2b33e82246dbeb8393cb9618896231b
 Q
